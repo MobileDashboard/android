@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Mobilní Nástěnka</string>
+
+    <!-- Welcome Activity -->
+
+    <string name="welcome_activity_title">Přihlášení</string>
+    <string name="welcome_activity_heading">@string/app_name</string>
+    <string name="welcome_activity_msg">Zadejte kod školní nástěnky, kterou chcete sledovat.</string>
+    <string name="welcome_activity_button">Pokračovat</string>
+    <string name="welcome_activity_input_hint">Nástěnka:</string>
+
+    <!-- Dashboard Activity -->
+
+    <string name="dashboard_activity_title">Nástěnka</string>
+
+</resources>
