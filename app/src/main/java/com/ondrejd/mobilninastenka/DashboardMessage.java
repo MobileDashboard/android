@@ -1,9 +1,20 @@
 package com.ondrejd.mobilninastenka;
 
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Class that represents single dashboard message.
  */
 public class DashboardMessage {
+    public final static String TAG = DashboardMessage.class.getSimpleName();
+
     public static int PRIORITY_EXTRA = 3;
     public static int PRIORITY_LOW = 1;
     public static int PRIORITY_NORMAL = 2;
@@ -25,11 +36,26 @@ public class DashboardMessage {
     private int sent;
 
     /**
-     * Construct dashboard message from a JSON string.
+     * Construct dashboard message from a JSON object.
      * @param json JSON from which should be message constructed.
      */
-    DashboardMessage(String json) {
-        //TODO Finish this!
+    DashboardMessage(JSONObject json) {
+        try {
+            boardHash = json.getString("notice-board-hash");
+            boardName = json.getString("notice-board-name");
+            id = json.getInt("id");
+            title = json.getString("title");
+            content = json.getString("content");
+            timestamp = json.getInt("timestamp");
+            String link = json.getString("link");
+            priority = json.getInt("priority");
+            deleted = json.getBoolean("deleted");
+            expiration = json.getInt("expiration");
+            author = json.getString("author");
+            sent = json.getInt("sended");
+        } catch (JSONException e) {
+            Log.e(TAG, "JSON parsing error: " + e.getMessage());
+        }
     }
 
     /**
@@ -76,4 +102,39 @@ public class DashboardMessage {
     public int getExpiration() { return expiration; }
     public String getAuthor() { return author; }
     public int getSent() { return sent; }
+
+    /**
+     * Return timestamp value as formatted date string.
+     * @return Formatted date string.
+     */
+    public String getTimestampAsDateString() {
+        return timestampToString(timestamp);
+    }
+
+    /**
+     * Return expiration value as formatted date string.
+     * @return Formatted date string.
+     */
+    public String getExpirationAsDateString() {
+        return timestampToString(expiration);
+    }
+
+    /**
+     * Return sent value as formatted date string.
+     * @return Formatted date string.
+     */
+    public String getSentAsDateString() {
+        return timestampToString(sent);
+    }
+
+    /**
+     * Converts timestamp to formatted date string.
+     * @param timestamp Timestamp to convert.
+     * @return Formatted date string.
+     */
+    private String timestampToString(int timestamp) {
+        Date date = new Date(timestamp);
+        DateFormat dateFormat = new SimpleDateFormat("d.M.yyyy");
+        return dateFormat.format(date);
+    }
 }

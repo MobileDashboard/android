@@ -5,12 +5,20 @@
 
     <string name="welcome_activity_title">Přihlášení</string>
     <string name="welcome_activity_heading">@string/app_name</string>
-    <string name="welcome_activity_msg">Zadejte kod školní nástěnky, kterou chcete sledovat.</string>
+    <string name="welcome_activity_msg">Zadejte kód školní nástěnky, kterou chcete sledovat.</string>
     <string name="welcome_activity_button">Pokračovat</string>
     <string name="welcome_activity_input_hint">Nástěnka:</string>
+    <string name="welcome_activity_error_msg">Kód nástěnky nemůže být prázdný!</string>
 
     <!-- Dashboard Activity -->
 
     <string name="dashboard_activity_title">Nástěnka</string>
+    <string name="dashboard_activity_waiting_msg">Prosíme, čekejte…</string>
+    <string name="dashboard_list_row_author_lbl">Autor:</string>
+    <string name="dashboard_list_row_sent_lbl">Odesláno:</string>
+
+    <!-- Settings Activity -->
+
+    <string name="title_activity_settings">Nastavení</string>
 
 </resources>

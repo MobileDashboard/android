@@ -11,8 +11,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -20,12 +18,6 @@ import java.util.List;
  */
 public class HttpHandler {
     public static final String TAG = HttpHandler.class.getSimpleName();
-
-    private String dashboardCode;
-
-    HttpHandler(String dashboardCode) {
-        this.dashboardCode = dashboardCode;
-    }
 
     /**
      * Loads JSON as string from the server.

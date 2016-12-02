@@ -18,23 +18,26 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+/**
+ * Activity with dashboard with messages.
+ * @todo Save dashboard hash if messages are downloaded successfully.
+ * @todo Change name of the activity (should be "Dashboard - {Name of the dashboard}").
+ */
 public class DashboardActivity extends AppCompatActivity {
     private final static String TAG = DashboardActivity.class.getSimpleName();
 
-    public static String DASHBOARD_CODE = "dashboard-code";
+    public static String DASHBOARD_HASH = "dashboard-hash";
 
     //URL of dashboard server
-    private static String url = "http://mobilninastenka.cz/api/";
+    private static String url = "http://mobilninastenka.cz/api/%s/messages";
 
-    //Hold's proper hash code of a dashboard
-    private String dashboardCode;
+    //Hold's proper hash of a dashboard
+    private String dashboardHash;
 
     private ProgressDialog progressDialog;
     private ListView listView;
 
-    private ArrayAdapter<String> listAdapter;
     ArrayList<HashMap<String, String>> messageList;
 
     @Override
@@ -43,17 +46,13 @@ public class DashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dashboard);
         //Get dashboard code from Intent
         Intent intent = getIntent();
-        dashboardCode = intent.getStringExtra(DASHBOARD_CODE);
+        dashboardHash = intent.getStringExtra(DASHBOARD_HASH);
         //Initialize messageList
         messageList = new ArrayList<>();
         //Initialize listView
         listView = (ListView) findViewById(R.id.activity_dashboard);
         //Get messages
         new GetMessages().execute();
-        //Access dashboard
-        //Dashboard dashboard = new Dashboard(dashboardCode);
-        //Get and render messages
-        //renderMessages(dashboard.getMessages());
     }
 
     /**
@@ -66,18 +65,17 @@ public class DashboardActivity extends AppCompatActivity {
 
             //Show progress dialog
             progressDialog = new ProgressDialog(DashboardActivity.this);
-            //TODO Use properly localized string!
-            progressDialog.setMessage("Please, wait...");
+            progressDialog.setMessage(getResources().getString(R.string.dashboard_activity_waiting_msg));
             progressDialog.setCancelable(false);
             progressDialog.show();
         }
 
         @Override
         protected Void doInBackground(Void... arg0) {
-            HttpHandler sh = new HttpHandler(dashboardCode);
+            HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url);
+            String jsonStr = sh.makeServiceCall(url.replace("%s", dashboardHash));
 
             Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -92,36 +90,25 @@ public class DashboardActivity extends AppCompatActivity {
                     for (int i = 0; i < messages.length(); i++) {
                         //parse JSON object
                         JSONObject c = messages.getJSONObject(i);
-                        String noticeBoardHash = c.getString("notice-board-hash");
-                        String noticeBoardName = c.getString("notice-board-name");
-                        String id = c.getString("id");
-                        String title = c.getString("title");
-                        String content = c.getString("content");
-                        //int timestamp = c.getInt("timestamp");
-                        String link = c.getString("link");
-                        //int priority = c.getInt("priority");
-                        //boolean deleted = c.getBoolean("deleted");
-                        //int expiration = c.getInt("expiration");
-                        String author = c.getString("author");
-                        //int sended = c.getInt("sended");
+                        DashboardMessage msg = new DashboardMessage(c);
 
-                        //temporary hash map for single message
-                        /**
-                         * @todo Use {@link DashboardMessage} object instead of {@link HashMap}!
-                         */
+                        if (msg.getTitle() == null) {
+                            continue;
+                        }
+                        //messageList.add(message)
                         HashMap<String, String> message = new HashMap<>();
-                        message.put("boardHash", noticeBoardHash);
-                        message.put("boardName", noticeBoardName);
-                        message.put("id", id);
-                        message.put("title", title);
-                        message.put("content", content);
-                        //message.put("timestamp", timestamp);
-                        message.put("link", link);
+                        message.put("boardHash", msg.getBoardHash());
+                        message.put("boardName", msg.getBoardName());
+                        message.put("id", String.valueOf(msg.getId()));
+                        message.put("title", msg.getTitle());
+                        message.put("content", msg.getContent());
+                        message.put("timestamp", msg.getTimestampAsDateString());
+                        message.put("link", msg.getTitle());
                         //message.put("priority", priority);
                         //message.put("deleted", deleted);
-                        //message.put("expiration", expiration);
-                        message.put("author", author);
-                        //message.put("sended", sended);
+                        message.put("expiration", msg.getExpirationAsDateString());
+                        message.put("author", msg.getAuthor());
+                        message.put("sent", msg.getSentAsDateString());
 
                         //add message to the list
                         messageList.add(message);
@@ -176,41 +163,23 @@ public class DashboardActivity extends AppCompatActivity {
                             //"id",
                             "title",
                             "content",
-                            //"timestamp",
+                            "timestamp",
                             //"link",
                             //"priority",
                             //"deleted",
                             //"expiration",
                             "author",
-                            //"sended"
+                            "sent"
                     },
                     new int[]{
                             R.id.list_row_title,
                             R.id.list_row_content,
-                            R.id.list_row_author
+                            R.id.list_row_timestamp,
+                            R.id.list_row_author,
+                            R.id.list_row_sent
                     }
             );
             listView.setAdapter(adapter);
         }
-    }
-
-    /**
-     * Renders messages.
-     * @param messages List of {@link DashboardMessage}.
-     * @todo Better rrendering!
-     */
-    private void renderMessages(List<DashboardMessage> messages) {
-        ArrayList<String> messagesList = new ArrayList<String>();
-
-        for(DashboardMessage message : messages) {
-            String msg = message.getTitle() + "\n" + message.getText() + "\n" +
-                    "[" + message.getAuthor() + "/" + message.getCreated() + "/" + message.getUpdated() + "]" +
-                    "\n" + "\n";
-            messagesList.add(msg);
-        }
-
-        listAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_row, messagesList);
-
-        listView.setAdapter(listAdapter);
     }
 }

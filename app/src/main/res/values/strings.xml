@@ -5,17 +5,21 @@
 
     <string name="welcome_activity_title">Login</string>
     <string name="welcome_activity_heading">@string/app_name</string>
-    <string name="welcome_activity_msg">Enter code of dashboard you want to watch.</string>
+    <string name="welcome_activity_msg">Enter hash of dashboard you want to watch.</string>
     <string name="welcome_activity_button">Continue</string>
     <string name="welcome_activity_input_hint">Dashboard:</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="welcome_activity_error_msg">Dashboard hash can not be empty!</string>
 
     <!-- Dashboard Activity -->
 
-    <string name="dashboard_activity_title">Nástěnka</string>
-    <string name="text1">text1</string>
+    <string name="dashboard_activity_title">Dashboard</string>
+    <string name="dashboard_activity_waiting_msg">Please, wait…</string>
+    <string name="dashboard_list_row_author_lbl">Author:</string>
+    <string name="dashboard_list_row_sent_lbl">Sent:</string>
 
     <!-- Settings Activity -->
+
+    <string name="title_activity_settings">Settings</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
