@@ -108,7 +108,8 @@ public class DashboardMessage {
      * @return Formatted date string.
      */
     public String getTimestampAsDateString() {
-        return timestampToString(timestamp);
+        long ts = (long) timestamp * 1000L;
+        return timestampToString(ts);
     }
 
     /**
@@ -116,7 +117,8 @@ public class DashboardMessage {
      * @return Formatted date string.
      */
     public String getExpirationAsDateString() {
-        return timestampToString(expiration);
+        long ts = (long) expiration * 1000L;
+        return timestampToString(ts);
     }
 
     /**
@@ -124,7 +126,8 @@ public class DashboardMessage {
      * @return Formatted date string.
      */
     public String getSentAsDateString() {
-        return timestampToString(sent);
+        long ts = (long) sent * 1000L;
+        return timestampToString(ts);
     }
 
     /**
@@ -132,7 +135,7 @@ public class DashboardMessage {
      * @param timestamp Timestamp to convert.
      * @return Formatted date string.
      */
-    private String timestampToString(int timestamp) {
+    private String timestampToString(long timestamp) {
         Date date = new Date(timestamp);
         DateFormat dateFormat = new SimpleDateFormat("d.M.yyyy");
         return dateFormat.format(date);
