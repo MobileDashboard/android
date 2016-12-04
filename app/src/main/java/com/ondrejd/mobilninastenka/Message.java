@@ -2,18 +2,20 @@ package com.ondrejd.mobilninastenka;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Class that represents single dashboard message.
+ * Single message object.
  */
-public class DashboardMessage {
-    public final static String TAG = DashboardMessage.class.getSimpleName();
+public class Message {
+    public final static String TAG = Message.class.getSimpleName();
 
     public static int PRIORITY_EXTRA = 3;
     public static int PRIORITY_LOW = 1;
@@ -39,7 +41,7 @@ public class DashboardMessage {
      * Construct dashboard message from a JSON object.
      * @param json JSON from which should be message constructed.
      */
-    DashboardMessage(JSONObject json) {
+    public Message(JSONObject json) {
         try {
             boardHash = json.getString("notice-board-hash");
             boardName = json.getString("notice-board-name");
@@ -73,9 +75,9 @@ public class DashboardMessage {
      * @param author Author of the message.
      * @param sent Timestamp when was message sent.
      */
-    DashboardMessage(String boardHash, String boardName, int id, String title, String content,
-                     int timestamp, String link, int priority, boolean deleted, int expiration,
-                     String author, int sent) {
+    public Message(String boardHash, String boardName, int id, String title, String content,
+                   int timestamp, String link, int priority, boolean deleted, int expiration,
+                   String author, int sent) {
         this.boardHash = boardHash;
         this.boardName = boardName;
         this.id = id;
@@ -88,6 +90,23 @@ public class DashboardMessage {
         this.expiration = expiration;
         this.author = author;
         this.sent = sent;
+    }
+
+    /**
+     * Factory method to convert an array of JSON objects into a list of objects.
+     * @param jsonObjects Source {@JSONArray} with messages.
+     * @return Returns {@link ArrayList} with messages.
+     */
+    public static ArrayList<Message> fromJson(JSONArray jsonObjects) {
+        ArrayList<Message> messages = new ArrayList<Message>();
+        for (int i = 0; i < jsonObjects.length(); i++) {
+            try {
+                messages.add(new Message(jsonObjects.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return messages;
     }
 
     public String getBoardHash() { return boardHash; }

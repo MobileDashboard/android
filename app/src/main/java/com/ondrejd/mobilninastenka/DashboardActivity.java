@@ -17,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Activity with dashboard with messages.
@@ -38,7 +37,7 @@ public class DashboardActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private ListView listView;
 
-    ArrayList<HashMap<String, String>> messageList;
+    ArrayList<Message> messageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
         Intent intent = getIntent();
         dashboardHash = intent.getStringExtra(DASHBOARD_HASH);
         //Initialize messageList
-        messageList = new ArrayList<>();
+        messageList = new ArrayList<Message>();
         //Initialize listView
         listView = (ListView) findViewById(R.id.activity_dashboard);
         //Get messages
@@ -82,37 +81,9 @@ public class DashboardActivity extends AppCompatActivity {
             if (jsonStr != null) {
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-
-                    // Getting JSON Array node
                     JSONArray messages = jsonObj.getJSONArray("messages");
 
-                    // looping through All Contacts
-                    for (int i = 0; i < messages.length(); i++) {
-                        //parse JSON object
-                        JSONObject c = messages.getJSONObject(i);
-                        DashboardMessage msg = new DashboardMessage(c);
-
-                        if (msg.getTitle() == null) {
-                            continue;
-                        }
-                        //messageList.add(message)
-                        HashMap<String, String> message = new HashMap<>();
-                        message.put("boardHash", msg.getBoardHash());
-                        message.put("boardName", msg.getBoardName());
-                        message.put("id", String.valueOf(msg.getId()));
-                        message.put("title", msg.getTitle());
-                        message.put("content", msg.getContent());
-                        message.put("timestamp", msg.getTimestampAsDateString());
-                        message.put("link", msg.getTitle());
-                        //message.put("priority", priority);
-                        //message.put("deleted", deleted);
-                        message.put("expiration", msg.getExpirationAsDateString());
-                        message.put("author", msg.getAuthor());
-                        message.put("sent", msg.getSentAsDateString());
-
-                        //add message to the list
-                        messageList.add(message);
-                    }
+                    messageList = Message.fromJson(messages);
                 } catch (final JSONException e) {
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
@@ -124,7 +95,6 @@ public class DashboardActivity extends AppCompatActivity {
                                     .show();
                         }
                     });
-
                 }
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
@@ -137,7 +107,6 @@ public class DashboardActivity extends AppCompatActivity {
                                 .show();
                     }
                 });
-
             }
 
             return null;
@@ -152,33 +121,7 @@ public class DashboardActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
 
-            //Move parsed JSON into the ListView
-            ListAdapter adapter = new SimpleAdapter(
-                    DashboardActivity.this,
-                    messageList,
-                    R.layout.simple_list_row,
-                    new String[]{
-                            //"notice-board-hash",
-                            //"notice-board-name",
-                            //"id",
-                            "title",
-                            "content",
-                            "timestamp",
-                            //"link",
-                            //"priority",
-                            //"deleted",
-                            //"expiration",
-                            "author",
-                            "sent"
-                    },
-                    new int[]{
-                            R.id.list_row_title,
-                            R.id.list_row_content,
-                            R.id.list_row_timestamp,
-                            R.id.list_row_author,
-                            R.id.list_row_sent
-                    }
-            );
+            MessagesAdapter adapter = new MessagesAdapter(DashboardActivity.this, messageList);
             listView.setAdapter(adapter);
         }
     }
