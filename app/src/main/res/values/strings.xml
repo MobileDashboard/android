@@ -15,7 +15,7 @@
     <string name="dashboard_activity_title">Dashboard</string>
     <string name="dashboard_activity_waiting_msg">Please, wait…</string>
     <string name="dashboard_activity_json_parse_err">Parsing server data error!</string>
-    <string name="dashboard_activity_server_parse_err">Couldn't get data from server!</string>
+    <string name="dashboard_activity_server_parse_err">Could not get data from server!</string>
     <string name="dashboard_list_row_author_lbl">Author:</string>
     <string name="dashboard_list_row_sent_lbl">Sent:</string>
 

@@ -1,10 +1,12 @@
 package com.ondrejd.mobilninastenka;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,6 +33,18 @@ public class MessagesAdapter extends ArrayAdapter<Message> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.simple_list_row, parent, false);
         }
+
+        /*LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.
+        );*/
+
+        if (message.getPriority() == Message.PRIORITY_EXTRA) {
+            convertView.setBackgroundColor(Color.parseColor("#f44336"));
+        }
+        else if (message.getPriority() == Message.PRIORITY_NORMAL) {
+            convertView.setBackgroundColor(Color.parseColor("#ffd740"));
+        }
+
         //Lookup view for data population
         TextView tvTitle = (TextView) convertView.findViewById(R.id.list_row_title);
         TextView tvTimestamp = (TextView) convertView.findViewById(R.id.list_row_timestamp);
