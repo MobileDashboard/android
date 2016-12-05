@@ -6,10 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -22,6 +19,7 @@ import java.util.ArrayList;
  * Activity with dashboard with messages.
  * @todo Save dashboard hash if messages are downloaded successfully.
  * @todo Change name of the activity (should be "Dashboard - {Name of the dashboard}").
+ * @todo URL of dashboard server should be taken from the settings!
  */
 public class DashboardActivity extends AppCompatActivity {
     private final static String TAG = DashboardActivity.class.getSimpleName();
@@ -90,7 +88,7 @@ public class DashboardActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
+                                    R.string.dashboard_activity_json_parse_err,
                                     Toast.LENGTH_LONG)
                                     .show();
                         }
@@ -102,7 +100,7 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                R.string.dashboard_activity_server_parse_err,
                                 Toast.LENGTH_LONG)
                                 .show();
                     }

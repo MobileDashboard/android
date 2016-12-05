@@ -14,6 +14,8 @@
 
     <string name="dashboard_activity_title">Nástěnka</string>
     <string name="dashboard_activity_waiting_msg">Prosíme, čekejte…</string>
+    <string name="dashboard_activity_json_parse_err">Chyba při parsování dat ze serveru!</string>
+    <string name="dashboard_activity_server_parse_err">Nemohu získat data ze serveru!</string>
     <string name="dashboard_list_row_author_lbl">Autor:</string>
     <string name="dashboard_list_row_sent_lbl">Odesláno:</string>
 
