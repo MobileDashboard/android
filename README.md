@@ -16,5 +16,4 @@ Hlavní obrazovka obsahuje nástěnku samotnou, zprávy jsou odlišeny barevně 
 
 ![Hlavní obrazovka](screen-02.png)
 
-...
 

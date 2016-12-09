@@ -8,3 +8,7 @@
 /build
 /captures
 .externalNativeBuild
+
+# Exclude transformed MarkDown files
+README.html
+TODO.html
