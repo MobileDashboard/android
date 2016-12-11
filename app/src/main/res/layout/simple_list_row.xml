@@ -1,66 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_row"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:padding="16dp"
-    android:background="?attr/panelBackground"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/list_row_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="32sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/list_row_timestamp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp" />
-
-    <TextView
-        android:id="@+id/list_row_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+    android:padding="16dp">
 
     <LinearLayout
+        android:id="@+id/list_row"
+        android:layout_gravity="top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="16dp">
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/list_row_sent_label"
+            android:id="@+id/list_row_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dashboard_list_row_sent_lbl"
+            android:textSize="32sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/list_row_sent"
+            android:id="@+id/list_row_timestamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp" />
 
         <TextView
-            android:id="@+id/list_row_author_label"
+            android:id="@+id/list_row_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/dashboard_list_row_author_lbl"
-            android:textStyle="bold" />
+            android:layout_marginTop="16dp" />
 
-        <TextView
-            android:id="@+id/list_row_author"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp" />
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                android:id="@+id/list_row_sent_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dashboard_list_row_sent_lbl"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_row_sent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp" />
+
+            <TextView
+                android:id="@+id/list_row_author_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/dashboard_list_row_author_lbl"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/list_row_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

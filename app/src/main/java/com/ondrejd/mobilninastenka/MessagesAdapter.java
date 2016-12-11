@@ -34,15 +34,16 @@ public class MessagesAdapter extends ArrayAdapter<Message> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.simple_list_row, parent, false);
         }
 
-        /*LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.
-        );*/
+        LinearLayout row = (LinearLayout) convertView.findViewById(R.id.list_row);
 
         if (message.getPriority() == Message.PRIORITY_EXTRA) {
-            convertView.setBackgroundColor(Color.parseColor("#f44336"));
+            row.setBackgroundColor(Color.parseColor("#f44336"));
         }
         else if (message.getPriority() == Message.PRIORITY_NORMAL) {
-            convertView.setBackgroundColor(Color.parseColor("#ffd740"));
+            row.setBackgroundColor(Color.parseColor("#ffd740"));
+        }
+        else if (message.getPriority() == Message.PRIORITY_LOW) {
+            row.setBackgroundColor(Color.parseColor("#f2f2f2"));
         }
 
         //Lookup view for data population

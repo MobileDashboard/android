@@ -16,4 +16,13 @@ Hlavní obrazovka obsahuje nástěnku samotnou, zprávy jsou odlišeny barevně 
 
 ![Hlavní obrazovka](screen-02.png)
 
+### Nastavení
+
+Níže několik obrazovek s nastavením aplikace.
+
+![Nastavení](screen-03.png)
+![Nastavení - Obecné](screen-04.png)
+![Nastavení - Upozornění](screen-05.png)
+![Nastavení - Pokročilé](screen-06.png)
+
 

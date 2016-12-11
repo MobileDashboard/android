@@ -7,6 +7,7 @@
     <string name="welcome_activity_heading">@string/app_name</string>
     <string name="welcome_activity_msg">Zadejte kód školní nástěnky, kterou chcete sledovat.</string>
     <string name="welcome_activity_button">Pokračovat</string>
+    <string name="welcome_activity_button2">Nastavení</string>
     <string name="welcome_activity_input_hint">Nástěnka:</string>
     <string name="welcome_activity_error_msg">Kód nástěnky nemůže být prázdný!</string>
 
@@ -22,5 +23,39 @@
     <!-- Settings Activity -->
 
     <string name="title_activity_settings">Nastavení</string>
+
+    <!-- TODO Settings Fragment "General" -->
+    <string name="pref_header_general">Obecné</string>
+    <string name="pref_title_dashboard_hash">Kód nástěnky</string>
+    <string name="pref_summary_dashboard_hash">Je možné vložit více kódů - jednoduše oddělte jednotlivé kódy čárkou</string>
+
+    <!-- Settings Fragment "Advanced" -->
+    <string name="pref_header_advanced_title">Pokročilé</string>
+    <string name="pref_header_advanced_summary">Nástavení cílového serveru a četnosti aktualizace dat.</string>
+    <string name="pref_title_sync_frequency">Četnost synchronizace</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minut</item>
+        <item>30 minut</item>
+        <item>1 hodina</item>
+        <item>3 hodiny</item>
+        <item>6 hodin</item>
+        <item>Nikdy</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+    <string name="pref_server_url">Adresa serveru</string>
+
+    <!-- Settings Fragment "Notifications" -->
+    <string name="pref_header_notifications">Upozornění</string>
+    <string name="pref_title_message_notifications">Upozornění na nové zprávy</string>
+    <string name="pref_title_ringtone">Zvonění</string>
+    <string name="pref_title_silent">Tiché</string>
+    <string name="pref_title_vibrate">Vibrace</string>
 
 </resources>

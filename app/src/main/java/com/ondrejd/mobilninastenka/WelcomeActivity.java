@@ -18,7 +18,10 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
     }
 
-    //Called when Continue button is clicked.
+    /**
+     * Handler for "Submit" button onClick event.
+     * @param view
+     */
     public void onClickButton(View view) {
         EditText dashboardCodeView = (EditText)findViewById(R.id.welcome_activity_input);
         String dashboardHash = dashboardCodeView.getText().toString();
@@ -30,6 +33,15 @@ public class WelcomeActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, DashboardActivity.class);
         intent.putExtra(DashboardActivity.DASHBOARD_HASH, dashboardHash);
+        startActivity(intent);
+    }
+
+    /**
+     * Handler for "Settings" button onClick event.
+     * @param view
+     */
+    public void onClickButton2(View view) {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 }

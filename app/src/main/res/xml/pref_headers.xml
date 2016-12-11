@@ -13,8 +13,9 @@
         android:title="@string/pref_header_notifications" />
 
     <header
-        android:fragment="com.ondrejd.mobilninastenka.SettingsActivity$DataSyncPreferenceFragment"
+        android:fragment="com.ondrejd.mobilninastenka.SettingsActivity$ServerPreferenceFragment"
         android:icon="@drawable/ic_sync_black_24dp"
-        android:title="@string/pref_header_data_sync" />
+        android:title="@string/pref_header_advanced_title"
+        android:summary="@string/pref_header_advanced_summary" />
 
 </preference-headers>
